@@ -16,9 +16,14 @@ class ProductController {
   async addProduct(req, res) {
     try {
       let fileName = null;
+      console.log(req.files.image);
+      
 
       if(req.files && req.files.image){
         fileName = await fileService.saveFile(req.files.image) 
+        if(!fileName){
+          res.send("Ошибка при добавлении файла" , fileName)
+        }
       }
 
       
